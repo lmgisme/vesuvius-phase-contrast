@@ -175,5 +175,4 @@ experimental confirmation.
 | `scripts/validate_on_dls.py` | Ground truth AUC on DLS fragments |
 | `results/tables/paganin_sweep_all.csv` | 56-row sweep results |
 | `results/tables/paganin_summary.csv` | Optimal parameters per volume |
-| `results/tables/ctf_summary.csv` | Fresnel numbers and CTF peaks |
 | `results/tables/ground_truth_auc.csv` | DLS validation AUCs |
