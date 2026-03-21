@@ -1,8 +1,10 @@
-"""Paganin phase retrieval filter for reconstructed CT slices.
+"""Paganin-form low-pass filter for reconstructed CT slices.
 
-For already-reconstructed CT volumes, this acts as a regularized low-pass
-filter that suppresses edge-enhancement fringes from propagation-based
-phase contrast. The filter in Fourier space is:
+Applied post-reconstruction, the Paganin filter kernel acts as a
+regularized low-pass filter (smoothing), not formal phase retrieval
+(which requires application to projection images before reconstruction).
+It suppresses high-frequency content including edge-enhancement fringes
+from propagation-based phase contrast. The filter in Fourier space is:
 
     filtered = F^{-1}{ F{I} / (1 + alpha * |k|^2) }
 

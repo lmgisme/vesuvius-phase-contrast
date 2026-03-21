@@ -1,10 +1,14 @@
-# Paganin Phase Retrieval Preprocessing for Vesuvius ESRF Fragment Data
+# Paganin-Form Smoothing for Vesuvius ESRF Fragment CT Data
 
-A physics analysis tool for applying Paganin phase retrieval preprocessing 
-to the Vesuvius Challenge ESRF fragment data (PHerc0500P2, PHerc0343P, 
-PHerc0009B). Provides a Fresnel-number-based decision rule for when 
-filtering is physically appropriate, optimal δ/β parameters per volume, 
-and an OME-Zarr streaming loader for the S3-hosted data.
+A physics analysis tool for applying Paganin-form smoothing (low-pass
+filtering) to already-reconstructed Vesuvius Challenge ESRF fragment CT
+data (PHerc0500P2, PHerc0343P, PHerc0009B). The Paganin filter kernel
+applied post-reconstruction acts as a regularized low-pass filter, not
+phase retrieval in the formal sense (which requires application to
+projection images before reconstruction). Provides a Fresnel-number-based
+framework for predicting which volumes have significant phase-contrast
+content baked into their reconstruction, optimal d/b parameters per
+volume, and an OME-Zarr streaming loader for the S3-hosted data.
 
 No full downloads required — all volumes stream from S3.
 
@@ -97,9 +101,17 @@ improvement is correspondingly small:
 | frag2 | 0.672 | 0.675 | +0.003 |
 | frag3 | 0.709 | 0.721 | +0.013 |
 
-The improvement is real but small and reflects noise suppression, not 
-fringe removal. The real test of phase retrieval benefit requires 
-ESRF-resolution data with ink labels (not yet available).
+The improvement is real but small and reflects noise suppression that
+preserves depth structure, not fringe removal. DLS reconstruction does
+not include Paganin filtering, so this is first-application smoothing
+on raw absorption-reconstructed data.
+
+**Note on ESRF volumes:** The ESRF volumes already have Paganin applied
+during reconstruction (metadata.json shows delta_beta=1000 plus unsharp
+masking). Applying the Paganin filter again post-reconstruction is
+therefore double-filtering on ESRF data. The ESRF before/after
+comparisons in this analysis should be interpreted accordingly. The DLS
+fragment results above are unaffected by this issue.
 
 ### Paganin + depth features (cross-fragment generalization)
 
